@@ -1,12 +1,20 @@
 {
-  "version": "1.0.0",
+  "version": "0.0.0",
   "name": "@_rj_/array-estensions",
+  "description": "A set of javascript array extensions/helpers",
   "author": "RJ Tuit",
   "type": "module",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/RobertjanTuit/array-extensions",
+  "keywords": [
+    "typescript",
+    "javascript",
+    "array",
+    "extensions",
+    "helpers"
+  ],
   "files": [
     "dist"
   ],
