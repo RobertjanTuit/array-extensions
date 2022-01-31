@@ -1,4 +1,4 @@
-# array-extensions
+# @_rj_/array-extensions
 
 A set of extensions to the array object to make dealing with them easier, neither unique or new, and with lots of inspiration from other languages, stackoverflow and other github projects :)
 
