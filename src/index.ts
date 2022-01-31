@@ -1,1 +1,1 @@
-export * from './arrayExtensions';
+export * from "./arrayExtensions";

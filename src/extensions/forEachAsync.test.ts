@@ -1,5 +1,5 @@
 import test from "ava";
-import "../index";
+import "../";
 
 test("Array.forEachAsync", async (t) => {
   let sum = 0;

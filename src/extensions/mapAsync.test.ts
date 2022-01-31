@@ -1,6 +1,5 @@
 import test from "ava";
-import ".";
-import "../index";
+import "../";
 
 test("Array.mapAsync", async (t) => {
   const testArray = [1, 2, 3, 4, 5];

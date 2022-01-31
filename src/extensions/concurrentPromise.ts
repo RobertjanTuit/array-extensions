@@ -1,14 +1,17 @@
 import { PromisedItem, PromiseState } from "../types/";
 
+export const defaultThreadCount = 4;
+export const defaultContinueOnError = true;
 export async function concurrentPromise<T, TT>(
   items: T[],
   callback: (item: T, index?: number, array?: T[]) => Promise<TT>,
-  threadCount: number = 4,
-  continueOnError: boolean = true
+  threadCount: number = defaultThreadCount,
+  continueOnError: boolean = defaultContinueOnError
 ) {
+  // eslint-disable-next-line no-async-promise-executor
   return new Promise<TT[]>(async (resolve, reject) => {
     // TODO: Do this
-    var wrappedItems = items.map(
+    const wrappedItems = items.map(
       (item, index) =>
         ({
           state: PromiseState.Initialized,
@@ -19,13 +22,13 @@ export async function concurrentPromise<T, TT>(
 
     for (let index = 0; index < wrappedItems.length; index++) {
       let doNext: (value?: unknown) => void;
-      var waitPromise = new Promise((r) => (doNext = r));
+      const waitPromise = new Promise((r) => (doNext = r));
 
       const wrappedItem = wrappedItems[index];
       const initializedCount = () =>
-        wrappedItems.filter((i) => i.state == PromiseState.Initialized).length;
+        wrappedItems.filter((i) => i.state === PromiseState.Initialized).length;
       const pendingCount = () =>
-        wrappedItems.filter((i) => i.state == PromiseState.Pending).length;
+        wrappedItems.filter((i) => i.state === PromiseState.Pending).length;
       const doneCount = () =>
         wrappedItems.filter((i) => i.state >= PromiseState.Fulfilled).length;
 
@@ -35,21 +38,21 @@ export async function concurrentPromise<T, TT>(
           wrappedItem.result = result;
           wrappedItem.state = PromiseState.Fulfilled;
         })
-        .catch(() => {
+        .catch((reason) => {
           wrappedItem.state = PromiseState.Rejected;
           if (continueOnError) {
-            reject();
+            reject(reason);
           }
         })
         .finally(() => {
           if (
             (pendingCount() < threadCount && initializedCount() > 0) ||
-            doneCount() == wrappedItems.length
+            doneCount() === wrappedItems.length
           ) {
             doNext();
           }
         });
-      if (initializedCount() == 0 || pendingCount() == threadCount) {
+      if (initializedCount() === 0 || pendingCount() === threadCount) {
         await waitPromise;
       }
     }

@@ -11,12 +11,18 @@
     "contents": "dist"
   },
   "scripts": {
-    "clean": "npx rimraf dist && npx rimraf node_modules/.cache",
-    "build": "npx tsc",
-    "test": "npx ava",
+    "build": "tsc",
     "build-test": "yarn build && yarn test",
-    "watch-test": "npx tsc-watch --onSuccess \"yarn test\"",
-    "lint": "npx eslint src/**/* *.json --fix"
+    "build-watch-test": "npx tsc-watch --onSuccess \"yarn test\"",
+    "clean": "rimraf dist && rimraf node_modules/.cache",
+    "clean-build": "npx clean && npx build",
+    "clean-build-test": "yarn clean && yarn build && yarn test",
+    "clean-build-watch-test": "yarn clean && yarn build-watch-test",
+    "tsindex": "ts-index-generator src --ignore **/*.test.ts",
+    "test": "ava",
+    "lint": "eslint src/**/* *.json --fix",
+    "release-prep": "yarn lint && yarn clean-build-test",
+    "release": "np"
   },
   "ava": {
     "nodeArguments": [
@@ -30,10 +36,12 @@
     "@typescript-eslint/parser": "^5.10.1",
     "ava": "^4.0.1",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.2.0",
     "np": "^7.6.0",
     "prettier": "^2.5.1",

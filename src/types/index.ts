@@ -1,2 +1,2 @@
-export * from './PromisedItem';
-export * from './PromiseState';
+export * from "./PromisedItem";
+export * from "./PromiseState";
