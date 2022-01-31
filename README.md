@@ -8,7 +8,7 @@ Includes TypeScript definition files.
 (Also see tests for more usage patterns)
 
 ```javascript
-import "array-extensions";
+import "@_rj_/array-extensions";
 
 // async/await
 await [1,2,3].forEachAsync(async (item) => {
