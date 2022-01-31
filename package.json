@@ -32,6 +32,9 @@
     "release-prep": "yarn lint && yarn clean-build-test",
     "release": "np"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "ava": {
     "nodeArguments": [
       "--experimental-modules",
