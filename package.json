@@ -7,9 +7,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/RobertjanTuit/array-extensions",
-  "np": {
-    "contents": "dist"
-  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "build-test": "yarn build && yarn test",
