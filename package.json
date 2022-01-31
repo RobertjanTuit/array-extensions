@@ -30,7 +30,7 @@
     "test": "ava",
     "lint": "eslint src/**/* *.json --fix",
     "release-prep": "yarn lint && yarn clean-build-test",
-    "release": "np"
+    "release": "np --no-2fa"
   },
   "publishConfig": {
     "access": "public"
